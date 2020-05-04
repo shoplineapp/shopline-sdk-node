@@ -1,0 +1,20 @@
+{
+  "name": "@shopline/shopline-sdk-node",
+  "version": "1.0.0",
+  "description": "Shopline Node SDK",
+  "scripts": {
+    "lint": "eslint lib",
+    "test": "jest test"
+  },
+  "eslintIgnore": [
+    "/dist",
+    "/public"
+  ],
+  "dependencies": {
+    "axios": "^0.19.2",
+    "eslint": "^6.8.0"
+  },
+  "devDependencies": {
+    "jest": "^25.5.4"
+  }
+}
