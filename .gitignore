@@ -1,5 +1,7 @@
 # NODE
 /node_modules
+example/node_modules
+example/.env
 
 # IDE
 .vscode
