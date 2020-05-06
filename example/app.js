@@ -36,7 +36,7 @@ const developerOAuth = new DeveloperOAuth({
 app.use('/', sessionStore);
 
 app.get('/oauth_callback', async (req, res, next) => {
-  return await developerOAuth.authenticate(req, res, next);
+  return await developerOAuth.callback(req, res, next);
 });
 
 app.get(
