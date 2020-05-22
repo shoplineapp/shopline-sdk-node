@@ -1,11 +1,11 @@
 # SHOPLINE SDK
 
-### FEATURE
+## Installation
+`yarn add https://github.com/shoplineapp/shopline-sdk-node.git`
 
+### Featrue
 
-#### models
-
-##### DeveloperOAuth Config
+##### Models - DeveloperOAuth Config
 
 ```javascript
 const developerOAuth = new DeveloperOAuth({
@@ -39,7 +39,7 @@ await developerOAuth.authenticate(req, res, next)
 await developerOAuth.callback(req, res, next)
 ```
 
-##### OpenAPIClient
+##### Models - OpenAPIClient
 
 ##### Config
 
