@@ -59,7 +59,7 @@ const openApiClient = new OpenApiClient({
   ```
 - getStaff (staffId, fields)
   ```javascript
-  await openAPIClient.getStaff(merchantId, fields)
+  await openAPIClient.getStaff(merchantId, fields, include_fields)
   ```
 - getStaffPermission (staffId, fields)
   ```javascript
