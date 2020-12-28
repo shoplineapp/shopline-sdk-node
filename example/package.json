@@ -1,10 +1,10 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shopline SDK Node Example",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,6 @@
     "express-session": "^1.17.1",
     "ioredis": "^4.16.3",
     "querystring": "^0.2.0"
-  }
+  },
+  "devDependencies": {}
 }
