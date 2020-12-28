@@ -3,7 +3,7 @@
 ## Installation
 `yarn add https://github.com/shoplineapp/shopline-sdk-node.git`
 
-### Featrue
+### Feature
 
 ##### Models - DeveloperOAuth Config
 
@@ -19,8 +19,8 @@ const developerOAuth = new DeveloperOAuth({
 
 
 ```
-- authenticate 
-  - it will add this fields to res.locals
+- authenticate
+  - The following fields would be added into res.locals
     - res.locals.currentMerchantId
     - res.locals.currentToken
     - res.locals.performerId
@@ -32,8 +32,8 @@ await developerOAuth.authenticate(req, res, next)
 
 
 - callback
-  - use for redirect_uri inject access token to express session
-  - add to req.session.accessTokens
+  - Used as a callback handler under redirect_uri to inject access token to express session
+  - Exchanged token would be added to req.session.accessTokens
 
 ```javascript
 await developerOAuth.callback(req, res, next)
@@ -42,8 +42,6 @@ await developerOAuth.callback(req, res, next)
 ##### Models - OpenAPIClient
 
 ##### Config
-
-await openAPIClient.getMerchant(merchantId, fields)
 
 ```javascript
 const openApiClient = new OpenApiClient({
@@ -55,13 +53,17 @@ const openApiClient = new OpenApiClient({
 
 - getMerchant
   ```javascript
-  await openAPIClient.getMerchant(merchantId, fields)
+  await openApiClient.getMerchant(merchantId, fields)
   ```
 - getStaff (staffId, fields)
   ```javascript
-  await openAPIClient.getStaff(merchantId, fields, include_fields)
+  await openApiClient.getStaff(merchantId, fields, include_fields)
   ```
 - getStaffPermission (staffId, fields)
   ```javascript
-  await openAPIClient.getStaffPermission(merchantId, fields)
+  await openApiClient.getStaffPermission(merchantId, fields)
+  ```
+- request ([axios request config](https://github.com/axios/axios#request-config))
+  ```javascript
+  await openApiClient.request(options)
   ```
