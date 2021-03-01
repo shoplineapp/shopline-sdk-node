@@ -8,7 +8,7 @@ require('dotenv').config();
 const { DeveloperOAuth, OpenApiClient } = require('..');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 let redisStore;
 
 if (process.env.SESSION_REDIS_ENABLED === 'true') {
@@ -21,6 +21,7 @@ if (process.env.SESSION_REDIS_ENABLED === 'true') {
 }
 
 const sessionStore = session({
+  name: process.env.SESSION_KEY,
   store: redisStore,
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -34,6 +35,7 @@ const sessionStore = session({
 
 const developerOAuth = new DeveloperOAuth({
   endpoint: process.env.DEVELOPER_OAUTH_ENDPOINT,
+  appId: process.env.DEVELOPER_OAUTH_APP_ID,
   clientId: process.env.DEVELOPER_OAUTH_APP_CLIENT_ID,
   clientSecret: process.env.DEVELOPER_OAUTH_APP_CLIENT_SECRET,
   redirectUri: process.env.DEVELOPER_OAUTH_APP_REDIRECT_URI,
