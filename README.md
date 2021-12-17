@@ -4,9 +4,7 @@
 
 `yarn add https://github.com/shoplineapp/shopline-sdk-node.git`
 
-## Usage
-
----
+## Feature
 
 ### Developer OAuth
 
@@ -27,6 +25,13 @@ const developerOAuth = new DeveloperOAuth({
 
 ##### Authenticate Middleware
 
+- authenticate
+  - The following fields would be added into res.locals
+    - res.locals.currentMerchantId
+    - res.locals.currentToken
+    - res.locals.performerId
+    - res.locals.performerMerchantIds
+
 ```js
 await developerOAuth.authenticate(req, res, next)
 ```
@@ -35,6 +40,11 @@ await developerOAuth.authenticate(req, res, next)
 
 ##### Callback Middleware
 
+- callback
+  - Used as a callback handler under redirect_uri to inject access token to express session
+  - Exchanged token would be added to req.session.accessTokens
+
+
 ```javascript
 await developerOAuth.callback(req, res, next)
 ```
@@ -42,7 +52,6 @@ await developerOAuth.callback(req, res, next)
 > :warning: **For development environment with multiple machines**: Session redis should be separated for multiple machines, as we will attempt to get latest token for redirect uri, and it may cause problem when redirecting.
 
 `developerOAuth.callback` will handle OAuth callbacks and inject `accessTokens` into `req.session.accessTokens`
-
 
 ---
 
@@ -62,13 +71,17 @@ const openApiClient = new OpenApiClient({
 
 - Get Merchant
   ```javascript
-  await openAPIClient.getMerchant(merchantId, fields)
+  await openApiClient.getMerchant(merchantId, fields)
   ```
 - Get Staff
   ```javascript
-  await openAPIClient.getStaff(merchantId, fields, include_fields)
+  await openApiClient.getStaff(merchantId, fields, include_fields)
   ```
 - Get Staff Permission
   ```javascript
-  await openAPIClient.getStaffPermission(merchantId, fields)
+  await openApiClient.getStaffPermission(merchantId, fields)
+  ```
+- request ([axios request config](https://github.com/axios/axios#request-config))
+  ```javascript
+  await openApiClient.request(options)
   ```
