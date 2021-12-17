@@ -1,6 +1,6 @@
 {
   "name": "@shopline/shopline-sdk-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shopline Node SDK",
   "scripts": {
     "lint": "eslint lib",
