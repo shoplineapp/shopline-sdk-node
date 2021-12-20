@@ -55,6 +55,23 @@ await developerOAuth.callback(req, res, next)
 
 ---
 
+##### Ensure Login Session Configuration
+DeveloperOAuth will ensure the access token login session with oauth service behind by default.
+But this requires your app hosted in the same domain of the oauth service. i.e. *.shoplineapp.com.
+If your app is hosted outside our domain, or you don't want the feature, you can disable it by setting `ensureLoginSession` to `false` when initialize.
+
+```js
+const developerOAuth = new DeveloperOAuth({
+  endpoint: process.env.DEVELOPER_OAUTH_ENDPOINT,
+  clientId: process.env.DEVELOPER_OAUTH_APP_CLIENT_ID,
+  clientSecret: process.env.DEVELOPER_OAUTH_APP_CLIENT_SECRET,
+  redirectUri: process.env.DEVELOPER_OAUTH_APP_REDIRECT_URI,
+  scope: process.env.DEVELOPER_OAUTH_APP_SCOPE,
+  ensureLoginSession: false,
+  logger: log,
+}),
+```
+
 ### OpenAPI Client
 
 ##### Configuration
