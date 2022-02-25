@@ -11,7 +11,8 @@
     "/public"
   ],
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
