@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 
 const { DeveloperOAuth, AppBridge } = require('../index');
-const FileSystemTokenStore = require('../lib/models/tokenStores/FileSystemTokenStore');
+const FileSystemTokenStore = require('./tokenStores/FileSystemTokenStore');
 
 const app = express();
 const port = 4000;
