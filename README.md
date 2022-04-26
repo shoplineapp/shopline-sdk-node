@@ -55,6 +55,33 @@ await developerOAuth.callback(req, res, next)
 
 ---
 
+##### Error Handler
+When request passing through authenticate middleware, error may throw during the authentication process.
+You can override the default error handling by pass in middlewares to DeveloperOAuth constructor
+```js
+const myErrorHandleFunc = async (req, res, next, error) => {
+  req.session.destroy();
+  res.redirect('/');
+}
+
+const errorHandler = {
+  ConfigurationError: myErrorHandleFunc,
+  SessionError: myErrorHandleFunc,
+  RefreshTokenError: myErrorHandleFunc,
+  DecodeTokenError: myErrorHandleFunc,
+}
+
+const developerOAuth = new DeveloperOAuth({
+  endpoint: process.env.DEVELOPER_OAUTH_ENDPOINT,
+  clientId: process.env.DEVELOPER_OAUTH_APP_CLIENT_ID,
+  clientSecret: process.env.DEVELOPER_OAUTH_APP_CLIENT_SECRET,
+  redirectUri: process.env.DEVELOPER_OAUTH_APP_REDIRECT_URI,
+  scope: process.env.DEVELOPER_OAUTH_APP_SCOPE,
+  errorHandler: errorHandler,
+  logger: log,
+}),
+```
+
 ##### Ensure Login Session Configuration
 DeveloperOAuth will ensure the access token login session with oauth service behind by default.
 But this requires your app hosted in the same domain of the oauth service. i.e. *.shoplineapp.com.
