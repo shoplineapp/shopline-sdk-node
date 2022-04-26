@@ -102,3 +102,62 @@ const openApiClient = new OpenApiClient({
   ```javascript
   await openApiClient.request(options)
   ```
+
+---
+
+### App Bridge
+
+#### Configuration
+
+```js
+const appBridge = new AppBridge({
+  developerOAuth: new DeveloperOauth({...}),
+  tokenStore: new MyTokenStore()
+})
+```
+
+#### TokenStore
+Token store is responsible to saving and fetch token data from storage.
+You need to implement the interface and pass to AppBridge when initializing it.
+
+```typescript
+interface TokenStoreInterface {
+  async fetch(clientId: string, merchantId: string, staffId: string): Promise<any>
+  async save(clientId: string, merchantId: string, staffId: string, tokenData: any): Promise<any>
+}
+```
+
+#### API References
+
+##### StartAuth Middleware
+
+- startAuth
+  - Used as starting point handler of OAuth flow triggered by app bridge frontend
+    
+```js
+await appBridge.startAuth()
+```
+
+##### Callback Middleware
+
+- callback
+  - Used as a callback handler under redirect_uri to store access token through tokenStore provided
+
+```javascript
+await appBridge.callback()
+```
+
+##### Authenticate Middleware
+
+- authenticate
+  - Validating the session token passed along with request
+  - Ensure access token exists in tokenStore if needed
+  - The following fields would be added into res.locals
+    - res.locals.currentMerchantId
+    - res.locals.currentToken
+    - res.locals.performerId
+
+```js
+await appBridge.authenticate( { requireAccessToken: <bool> } )
+```
+
