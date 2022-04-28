@@ -42,6 +42,7 @@ const developerOAuth = new DeveloperOAuth({
 });
 
 app.use('/', sessionStore);
+app.set('trust proxy', 1);
 
 app.get('/oauth_callback', async (req, res, next) => developerOAuth.callback(req, res, next));
 

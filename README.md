@@ -72,6 +72,17 @@ const developerOAuth = new DeveloperOAuth({
 }),
 ```
 
+##### Trust Proxy
+If your app is behind proxy, please set trust proxy in express.
+Without doing so, it might affect the protocol, ip and host of the Request object passed in when express needs to read real values from `X-Forward-` headers
+
+ref: https://expressjs.com/en/guide/behind-proxies.html
+
+```js
+app.set('trust proxy', 1)
+```
+
+
 ### OpenAPI Client
 
 ##### Configuration
