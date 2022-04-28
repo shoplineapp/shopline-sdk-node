@@ -32,6 +32,17 @@ const sessionStore = session({
   },
 });
 
+const defaultErrorHandleFunc = async (req, res, next, error) => {
+  console.error(error);
+  req.session.destroy();
+  res.redirect('/');
+};
+
+const myErrorHandler = {
+  DecodeTokenError: defaultErrorHandleFunc,
+  RefreshTokenError: defaultErrorHandleFunc,
+};
+
 const developerOAuth = new DeveloperOAuth({
   endpoint: process.env.DEVELOPER_OAUTH_ENDPOINT,
   clientId: process.env.DEVELOPER_OAUTH_APP_CLIENT_ID,
@@ -39,12 +50,16 @@ const developerOAuth = new DeveloperOAuth({
   redirectUri: process.env.DEVELOPER_OAUTH_APP_REDIRECT_URI,
   scope: process.env.DEVELOPER_OAUTH_APP_SCOPE,
   logger: console.log,
+  errorHandler: myErrorHandler,
 });
 
 app.use('/', sessionStore);
 app.set('trust proxy', 1);
 
-app.get('/oauth_callback', async (req, res, next) => developerOAuth.callback(req, res, next));
+app.get('/oauth_callback', async (req, res, next) => developerOAuth.callback(req, res, next),
+  async (req, res, next) => {
+    res.redirect('/');
+  });
 
 app.get(
   '/',
