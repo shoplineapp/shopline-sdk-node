@@ -3,8 +3,8 @@
 example/node_modules
 example/.env
 
-example-app-bridge/node_modules
-example-app-bridge/.env
+example-admin-embedded-app/node_modules
+example-admin-embedded-app/.env
 
 # IDE
 .vscode
