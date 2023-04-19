@@ -143,12 +143,12 @@ const openApiClient = new OpenApiClient({
 
 ---
 
-### App Bridge
+### Admin Embedded App
 
 #### Configuration
 
 ```js
-const appBridge = new AppBridge({
+const adminEmbeddedApp = new AdminEmbeddedApp({
   developerOAuth: new DeveloperOauth({...}),
   tokenStore: new MyTokenStore()
 })
@@ -156,7 +156,7 @@ const appBridge = new AppBridge({
 
 #### TokenStore
 Token store is responsible to saving and fetch token data from storage.
-You need to implement the interface and pass to AppBridge when initializing it.
+You need to implement the interface and pass to AdminEmbeddedApp when initializing it.
 
 ```typescript
 interface TokenStoreInterface {
@@ -170,10 +170,10 @@ interface TokenStoreInterface {
 ##### StartAuth Middleware
 
 - startAuth
-  - Used as starting point handler of OAuth flow triggered by app bridge frontend
+  - Used as starting point handler of OAuth flow triggered by admin embedded app sdk frontend
     
 ```js
-await appBridge.startAuth()
+await adminEmbeddedApp.startAuth()
 ```
 
 ##### Callback Middleware
@@ -182,7 +182,7 @@ await appBridge.startAuth()
   - Used as a callback handler under redirect_uri to store access token through tokenStore provided
 
 ```javascript
-await appBridge.callback()
+await adminEmbeddedApp.callback()
 ```
 
 ##### Authenticate Middleware
@@ -196,6 +196,6 @@ await appBridge.callback()
     - res.locals.performerId
 
 ```js
-await appBridge.authenticate( { requireAccessToken: <bool> } )
+await adminEmbeddedApp.authenticate( { requireAccessToken: <bool> } )
 ```
 

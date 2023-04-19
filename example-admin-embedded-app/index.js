@@ -2,7 +2,7 @@ const express = require('express');
 
 require('dotenv').config();
 
-const { DeveloperOAuth, AppBridge } = require('../index');
+const { DeveloperOAuth, AdminEmbeddedApp } = require('../index');
 const FileSystemTokenStore = require('./tokenStores/FileSystemTokenStore');
 
 const app = express();
@@ -19,18 +19,18 @@ const developerOAuth = new DeveloperOAuth({
 
 app.use(express.json());
 
-const appBridge = new AppBridge({
+const adminEmbeddedApp = new AdminEmbeddedApp({
   developerOauth: developerOAuth,
   tokenStore: new FileSystemTokenStore({ path: './.tokens' }),
 });
 
-app.get('/auth', appBridge.startAuth());
+app.get('/auth', adminEmbeddedApp.startAuth());
 
-app.get('/callback', appBridge.callback());
+app.get('/callback', adminEmbeddedApp.callback());
 
 const apiRoutes = express.Router();
 
-apiRoutes.use(appBridge.authenticate({ requireAccessToken: true }));
+apiRoutes.use(adminEmbeddedApp.authenticate({ requireAccessToken: true }));
 
 apiRoutes.get('/api/fetch-data', async (req, res) => {
   return res.json({

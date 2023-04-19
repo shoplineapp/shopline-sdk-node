@@ -1,10 +1,10 @@
-# Shopline SDK Node Example App for App Bridge
+# Shopline SDK Node Example App for Admin Embedded App
 
 ## Run the app
 
-1. In `shopline-sdk-node` directory (not the `example-app-bridge` directory), run `yarn install` (assuming you have `yarn` installed).
+1. In `shopline-sdk-node` directory (not the `example-admin-embedded-app` directory), run `yarn install` (assuming you have `yarn` installed).
 
-2. In `example-app-bridge` directory, run `yarn install` as well.
+2. In `example-admin-embedded-app` directory, run `yarn install` as well.
 
 3. In example directory, run `cp .env.example .env` to create your env configuration. Edit the .env and provide your OAuth app information.
 
