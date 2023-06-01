@@ -1,9 +1,10 @@
 const express = require('express');
+const expressSession = require('express-session');
 
 require('dotenv').config();
 
 const { DeveloperOAuth, AppBridge } = require('../index');
-const FileSystemTokenStore = require('./tokenStores/FileSystemTokenStore');
+const FileSystemTokenStore = require('./tokenStores/FileSystemTokenStore'); // DO NOT USE IN PRODUCTION
 
 const app = express();
 const port = 4000;
@@ -15,18 +16,26 @@ const developerOAuth = new DeveloperOAuth({
   redirectUri: process.env.DEVELOPER_OAUTH_APP_REDIRECT_URI,
   scope: process.env.DEVELOPER_OAUTH_APP_SCOPE,
   logger: console.log,
+  ensureLoginSession: false,
 });
 
 app.use(express.json());
 
+app.use(expressSession({
+  store: undefined, // by default, it uses MemoryStore. DO NOT USE IN PRODUCTION
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+}));
+
 const appBridge = new AppBridge({
-  developerOauth: developerOAuth,
+  developerOAuth: developerOAuth,
   tokenStore: new FileSystemTokenStore({ path: './.tokens' }),
 });
 
-app.get('/auth', appBridge.startAuth());
+app.get('/oauth', appBridge.startAuth());
 
-app.get('/callback', appBridge.callback());
+app.get('/oauth/callback', appBridge.callback());
 
 const apiRoutes = express.Router();
 
